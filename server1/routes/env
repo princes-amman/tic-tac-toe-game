@@ -1,0 +1,4 @@
+MONGO_URI=mongodb+srv://muhammad-azan1234:12AbFqGr9Am@muhammad-cluster.9485vh6.mongodb.net/quizgame?retryWrites=true&w=majority&appName=muhammad-cluster
+PORT=5000
+
+
