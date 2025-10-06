@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "type": "tic-tac-toe",
+    "size": 3,
+    "question": null
+  },
+  {
+    "id": 2,
+    "type": "tic-tac-toe",
+    "size": 4,
+    "question": null
+  },
+  {
+    "id": 3,
+    "type": "quiz",
+    "size": null,
+    "question": "What has keys but can't open locks?",
+    "options": ["Piano", "Car", "Map"],
+    "answer": "Piano"
+  }
+]
