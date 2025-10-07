@@ -232,7 +232,7 @@ export default function Game() {
     const name = winPlayer === "X" ? player1 || "Player X" : player2 || "Player O";
     const score = 1;
     try {
-      await axios.post("http://localhost:5000/api/leaderboard", { name, score });
+      await axios.post("https://server1-7s0j.onrender.com/api/leaderboard", { name, score });
     } catch (err) {
       console.error("Error saving leaderboard:", err);
     }
