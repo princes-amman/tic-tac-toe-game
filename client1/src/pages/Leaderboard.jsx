@@ -6,11 +6,14 @@ export default function Leaderboard() {
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    axios.get("https://server1-7s0j.onrender.com/api/leaderboard")
-      .then((res) => setScores(res.data))
-      .catch((err) => console.error(err));
+    fetch("https://server1-7s0j.onrender.com/api/leaderboard")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ Got data from server:", data);
+        setScores(data);
+      })
+      .catch((err) => console.error("❌ Error fetching leaderboard:", err));
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 text-white">
       <Navbar stars={0} />
