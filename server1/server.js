@@ -1,15 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require("dotenv");
 const path = require("path");
 
+dotenv.config(); // ✅ Load environment variables first
+
 const app = express();
+
+// ✅ Middleware
 app.use(cors());
 app.use(express.json());
 
-// ✅ Connect to MongoDB (local or Render)
-const mongoUri = process.env.MONGO_URI || "MONGO_URI=mongodb+srv://muhammad-azan1234:12AbFqGr9Am@muhammad-cluster.9485vh6.mongodb.net/quizgame?retryWrites=true&w=majority&appName=muhammad-cluster
-";
+// ✅ Connect to MongoDB (Atlas)
+const mongoUri = process.env.MONGO_URI;
 
 mongoose.connect(mongoUri)
   .then(() => console.log("✅ MongoDB connected"))
