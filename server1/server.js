@@ -59,10 +59,11 @@ app.get("/api/leaderboard", async (req, res) => {
 // ✅ Serve frontend (React build)
 app.use(express.static(path.join(__dirname, "client1/build")));
 
-// ✅ Catch-all route for React Router
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client1/build", "index.html"));
+// ✅ Fix for Express v5 (no wildcard * allowed)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "client1", "build", "index.html"));
 });
+
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
