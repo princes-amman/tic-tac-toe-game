@@ -1,23 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
+// ✅ Connect to MongoDB
 mongoose.connect("mongodb+srv://muhammad-azan1234:12AbFqGr9Am@muhammad-cluster.9485vh6.mongodb.net/quizgame?retryWrites=true&w=majority&appName=muhammad-cluster")
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-// Schemas
+// ✅ Schema
 const LeaderboardSchema = new mongoose.Schema({
   name: String,
   score: Number,
 });
 const Leaderboard = mongoose.model("Leaderboard", LeaderboardSchema);
 
+// ✅ Level data
 const levels = [
   { level: 1, size: 3, question: "What comes next in the sequence: 1,2,3,?" },
   { level: 2, size: 4, question: "What is the capital of France?" },
@@ -31,7 +33,7 @@ const levels = [
   { level: 10, size: 7, question: "What is the opposite of 'cold'?" },
 ];
 
-// Routes
+// ✅ API Routes
 app.get("/api/levels/:levelNumber", (req, res) => {
   const levelNumber = parseInt(req.params.levelNumber);
   const level = levels.find(l => l.level === levelNumber);
@@ -50,5 +52,15 @@ app.get("/api/leaderboard", async (req, res) => {
   const topScores = await Leaderboard.find().sort({ score: -1 }).limit(10);
   res.json(topScores);
 });
+
+// ✅ Serve frontend (React build)
+app.use(express.static(path.join(__dirname, "client1/build")));
+
+// ✅ Catch-all route for React Router
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client1/build", "index.html"));
+});
+
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
