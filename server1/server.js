@@ -8,7 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 // ✅ Connect to MongoDB (local or Render)
-const mongoUri = process.env.MONGO_URI || "mongodb+srv://muhammad-azan1234:<db_password>@muhammad-cluster.9485vh6.mongodb.net/?retryWrites=true&w=majority&appName=muhammad-cluster";
+const mongoUri = process.env.MONGO_URI || "MONGO_URI=mongodb+srv://muhammad-azan1234:12AbFqGr9Am@muhammad-cluster.9485vh6.mongodb.net/quizgame?retryWrites=true&w=majority&appName=muhammad-cluster
+";
 
 mongoose.connect(mongoUri)
   .then(() => console.log("✅ MongoDB connected"))
