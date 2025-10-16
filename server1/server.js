@@ -7,10 +7,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Connect to MongoDB
-mongoose.connect("mongodb+srv://muhammad-azan1234:12AbFqGr9Am@muhammad-cluster.9485vh6.mongodb.net/quizgame?retryWrites=true&w=majority&appName=muhammad-cluster")
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+// ✅ Connect to MongoDB (local or Render)
+const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/quizgame";
+
+mongoose.connect(mongoUri)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.log("❌ MongoDB connection error:", err));
+
 
 // ✅ Schema
 const LeaderboardSchema = new mongoose.Schema({
