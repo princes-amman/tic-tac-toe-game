@@ -4,16 +4,17 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
 
-dotenv.config(); // Load environment variables
+// Load environment variables first
+dotenv.config();
 
 const app = express();
 
-// CORS configuration
+// CORS configuration (using the more specific list from HEAD)
 app.use(
   cors({
     origin: [
       "https://tic-tac-toe-game-2-ely7.onrender.com", // your deployed frontend
-      "http://localhost:3000",                        // local frontend
+      "http://localhost:3000", // local frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
@@ -21,6 +22,7 @@ app.use(
   })
 );
 
+// Middleware for JSON parsing
 app.use(express.json());
 
 // Connect to MongoDB
@@ -87,8 +89,10 @@ app.get("/api/leaderboard", async (req, res) => {
   }
 });
 
-// Serve React frontend
+// Serve frontend (React build)
 app.use(express.static(path.join(__dirname, "client1/build")));
+
+// Fallback route for client-side routing (sends index.html for all non-API requests)
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "client1", "build", "index.html"));
 });
