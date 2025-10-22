@@ -5,17 +5,14 @@ import Navbar from "../components/Navbar";
 export default function Leaderboard() {
   const [scores, setScores] = useState([]);
 
-  // ✅ Updated useEffect (with console logs to debug)
   useEffect(() => {
-    axios
-      .get("https://server1-7s0j.onrender.com/api/leaderboard")
-      .then((res) => {
-        console.log("✅ Got data from server:", res.data);
-        setScores(res.data);
+    fetch("https://server1-7s0j.onrender.com/api/leaderboard")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ Got data from server:", data);
+        setScores(data);
       })
-      .catch((err) =>
-        console.error("❌ Error fetching leaderboard:", err)
-      );
+      .catch((err) => console.error("❌ Error fetching leaderboard:", err));
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 text-white">
