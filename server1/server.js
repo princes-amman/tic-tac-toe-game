@@ -89,13 +89,7 @@ app.get("/api/leaderboard", async (req, res) => {
   }
 });
 
-// Serve frontend (React build)
-app.use(express.static(path.join(__dirname, "client1/build")));
 
-// Fallback route for client-side routing (sends index.html for all non-API requests)
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "client1", "build", "index.html"));
-});
 
 // Start server
 const PORT = process.env.PORT || 5000;
